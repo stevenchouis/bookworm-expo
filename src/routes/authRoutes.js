@@ -8,6 +8,15 @@ const generateToken = (userId) => {
   return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "15d" });
 };
 
+router.get("/", async (req, res) => {
+  try {
+    res.json({result: 'hello'});
+  } catch (error) {
+    console.log("Error in get all books route", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 router.post("/register", async (req, res) => {
   try {
     const { email, username, password } = req.body;
